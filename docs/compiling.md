@@ -22,6 +22,19 @@ export FFTW_LIB_PATH=<path to FFTW lib> # example: /usr/local/Cellar/fftw/3.3.9_
 fpm build --profile debug --flag "-cpp -DUSE_ASSERTIONS=.true. -I$FFTW_INCLUDE_PATH -fallow-argument-mismatch -ffree-line-length-none -DVERSION=\\\"$GIT_VERSION\\\" -L$NETCDF_LIB_PATH -L$FFTW_LIB_PATH"
 ```
 
+### Managed NIC (tested on UOregon Jupiter)
+
+```
+module load fftw netcdf-c netcdf-fortran gcc/11.1.0
+cd <icar-source-location>
+export GIT_VERSION=`git describe --long --dirty --all --always | sed -e's/heads\///'`
+export FFTW_INCLUDE_PATH=<path to fftw include dir> # example: /storage/packages/e4s/21.05/spack/opt/spack/linux-ubuntu20.04-x86_64/gcc-11.1.0/fftw-3.3.9-h4rkjauoflaxoliza6ykouaszve7ec4b/include/
+export FFTW_LIB_PATH=<path to FFTW lib> # example: /storage/packages/e4s/21.05/spack/opt/spack/linux-ubuntu20.04-x86_64/gcc-11.1.0/fftw-3.3.9-h4rkjauoflaxoliza6ykouaszve7ec4b/lib/
+export NETCDF_LIB_PATH=<path to netcdf lib> # example: /storage/packages/e4s/21.05/spack/opt/spack/linux-ubuntu20.04-x86_64/gcc-11.1.0/netcdf-c-4.8.0-luqwz2mbj3nsrbfijihqlucwhivsofac/lib/
+export NETCDF_FORTRAN_LIB_PATH=<path to netcdf-fortran lib> # example: /storage/packages/e4s/21.05/spack/opt/spack/linux-ubuntu20.04-x86_64/gcc-11.1.0/netcdf-fortran-4.5.3-yrzkcivp66mqllbgm6wkhwctqfbfgmwp/lib/
+fpm build --profile debug --flag "-cpp -DUSE_ASSERTIONS=.true. -I$FFTW_INCLUDE_PATH -fallow-argument-mismatch -ffree-line-length-none -DVERSION=\\\"$GIT_VERSION\\\" -L$FFTW_LIB_PATH -L$NETCDF_LIB_PATH -L$NETCDF_FORTRAN_LIB_PATH"
+```
+
 ##Building with the Makefile
 
 Edit the makefile to set the path to your compiled NetCDF and FFTW libraries
